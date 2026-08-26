@@ -1,48 +1,52 @@
-import type { PokemonResumo } from "../models/Pokemon.js"; 
+import type { PokemonResumo } from "../models/Pokemon.js";
 
-export const catalogo: PokemonResumo[] = [];
+export class CatalogoPokemon {
+    private pokemons: PokemonResumo[] = [];
 
-export function adicionarAoCatalogo(pokemon: PokemonResumo):void {
-    const jaExiste = catalogo.some((item) => item.id === pokemon.id);
+    adicionar(pokemon: PokemonResumo): void {
+        const jaExiste = this.pokemons.some(
+            (item) => item.id === pokemon.id
+        );
 
-    if (jaExiste) {
-        console.log(`[AVISO] ${pokemon.nome} já está no catálogo.`);
-        return;
+        if (jaExiste) {
+            console.log(`[AVISO] ${pokemon.nome} já está no catálogo.`);
+            return;
+        }
+
+        this.pokemons.push(pokemon);
+
+        console.log(`[OK] ${pokemon.nome} adicionado ao catálogo.`);
     }
 
-    catalogo.push(pokemon);
+    listar(): void {
+        if (this.pokemons.length === 0) {
+            console.log("[AVISO] Catálogo vazio.");
+            return;
+        }
 
-    console.log(`[OK] ${pokemon.nome} adicionado ao catálogo.`);
-}
+        console.log("Catálogo atual:");
 
-export function listarCatalogo(): void {
-    if (catalogo.length === 0) {
-        console.log("[AVISO] Catálogo vazio.");
-        return;
+        this.pokemons.forEach((pokemon) => {
+            console.log(
+                `#${pokemon.id} - ${pokemon.nome} | Tipos: ${pokemon.tipos.join(", ")} | Altura: ${pokemon.altura} | Peso: ${pokemon.peso}`
+            );
+        });
     }
 
-    console.log("Catálogo atual:");
+    remover(id: number): void {
+        const existe = this.pokemons.some(
+            (pokemon) => pokemon.id === id
+        );
 
-    catalogo.forEach((pokemon) => {
-        console.log(
-            `#${pokemon.id} - ${pokemon.nome} | Tipos: ${pokemon.tipos.join(", ")} | Altura: ${pokemon.altura} | Peso: ${pokemon.peso}`
-);
-    });
-}
+        if (!existe) {
+            console.log("[AVISO] Nenhum Pokémon encontrado com esse ID.");
+            return;
+        }
 
-export function removerDoCatalogo(id: number): PokemonResumo[] {
-    const existe = catalogo.some((pokemon) => pokemon.id === id);
+        this.pokemons = this.pokemons.filter(
+            (pokemon) => pokemon.id !== id
+        );
 
-    if (!existe) {
-        console.log("[AVISO] Nenhum Pokémon encontrado com esse ID.");
-        return catalogo;
+        console.log("[OK] Pokémon removido do catálogo.");
     }
-
-    const indice = catalogo.findIndex((pokemon) => pokemon.id === id);
-
-    catalogo.splice(indice, 1);
-
-    console.log("[OK] Pokémon removido do catálogo.");
-
-    return catalogo;
 }

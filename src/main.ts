@@ -1,19 +1,20 @@
 import { buscarPokemon } from "./services/PokeApiService.js";
-import { adicionarAoCatalogo, listarCatalogo, removerDoCatalogo } from "./services/BoxService.js";
+import { CatalogoPokemon } from "./services/BoxService.js";
 
 async function main() {
+    const catalogo = new CatalogoPokemon();
+
     const pokemon = await buscarPokemon("pikachu");
 
     if (pokemon !== null) {
-        adicionarAoCatalogo(pokemon);
-        
+        catalogo.adicionar(pokemon);
     }
 
-    listarCatalogo();
+    catalogo.listar();
 
-    removerDoCatalogo(25);
+    catalogo.remover(25);
 
-    listarCatalogo();
+    catalogo.listar();
 }
 
 main();
