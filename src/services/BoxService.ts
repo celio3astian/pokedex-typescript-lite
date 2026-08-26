@@ -14,3 +14,18 @@ export function adicionarAoCatalogo(pokemon: PokemonResumo):void {
 
     console.log(`[OK] ${pokemon.nome} adicionado ao catálogo.`);
 }
+
+export function listarCatalogo(): void {
+    if (catalogo.length === 0) {
+        console.log("[AVISO] Catálogo vazio.");
+        return;
+    }
+
+    console.log("Catálogo atual:");
+
+    catalogo.forEach((pokemon) => {
+        console.log(
+            `#${pokemon.id} - ${pokemon.nome} | Tipos: ${pokemon.tipos.join(", ")} | Altura: ${pokemon.altura} | Peso: ${pokemon.peso}`
+);
+    });
+}
