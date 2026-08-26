@@ -11,7 +11,7 @@ export async function buscarPokemon(
         const resposta = await fetch(url);
 
         if (!resposta.ok){
-            console.log(`[ERRO] Pokémon não encontrado:${nomeOuId}`);
+            console.log(`[ERRO] Pokémon não encontrado: ${nomeOuId}`);
             return null;
         }
 
@@ -25,11 +25,11 @@ export async function buscarPokemon(
             peso: dados.weight
         };
 
-        console.log (`[OK] Pokemon encontrado:${pokemon.nome}`);
+        console.log (`[OK] Pokemon encontrado: ${pokemon.nome}`);
         return pokemon;
 
     }catch (erro){
-        console.log('[ERRO] Não foi possível buscar o Pokémon.');
+        console.log("[ERRO] Não foi possível buscar o Pokémon.");
         return null;
     }
 }
