@@ -4,11 +4,25 @@ import { CatalogoPokemon } from "./services/BoxService.js";
 async function main() {
     const catalogo = new CatalogoPokemon();
 
-    const pokemon = await buscarPokemon("pikachu");
+    const pikachu = await buscarPokemon("pikachu");
 
-    if (pokemon !== null) {
-        catalogo.adicionar(pokemon);
+    if (pikachu !== null) {
+        catalogo.adicionar(pikachu);
     }
+
+    const charmander = await buscarPokemon("charmander");
+
+    if (charmander !== null) {
+        catalogo.adicionar(charmander);
+    }
+
+    const pikachuDuplicado = await buscarPokemon("pikachu");
+
+    if (pikachuDuplicado !== null) {
+        catalogo.adicionar(pikachuDuplicado);
+    }
+
+    await buscarPokemon("pokemon-inexistente");
 
     catalogo.listar();
 
