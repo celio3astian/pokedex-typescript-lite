@@ -37,7 +37,7 @@ export class TerminalController {
                     const pokemon = await buscarPokemon(nomeOuId);
 
                     if (pokemon !== null) {
-                        this.catalogo.adicionar(pokemon);
+                        await this.catalogo.adicionar(pokemon);
                     }
 
                     break;
@@ -59,7 +59,7 @@ export class TerminalController {
                         break;
                     }
 
-                    this.catalogo.remover(id);
+                    await this.catalogo.remover(id);
                     break;
                 }
 
